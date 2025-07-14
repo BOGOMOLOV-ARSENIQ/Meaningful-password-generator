@@ -10,10 +10,27 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(TGBM)
 
 add_executable(bot_exec 
-src/pass_generator.h
-src/pass_generator.cpp
-  src/main.cpp 
+  src/data/data.h
+  src/data/data.cpp
+  src/utils/utils.h
+  src/utils/utils.cpp
+  src/utils/formatter.h
+  src/utils/formatter.cpp
+  src/generator/pass_generator.h
+  src/generator/pass_generator.cpp
+  src/builder/phrase_builder.h
+  src/builder/phrase_builder.cpp
+  src/bot/main.cpp
 )
+
+target_include_directories(bot_exec PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/data
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/utils
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/generator
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/builder
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/bot
+)
+
 target_link_libraries(bot_exec PRIVATE tgbmlib)
 
 add_custom_target(run
